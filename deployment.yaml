@@ -23,4 +23,4 @@ spec:
       volumes:
       - name: jenkins-demo-home
         persistentVolumeClaim:
-          claimName: jenkins-pvc
+          claimName: jenkins-demo-pvc
