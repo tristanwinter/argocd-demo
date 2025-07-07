@@ -1,26 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: jenkins-demo
+  name: demo
+  Namespace: demo
 spec:
   replicas:  1
   selector:
     matchLabels:
-      app: jenkins-demo
+      app: demo
   template:
     metadata:
       labels:
-        app: jenkins-demo
+        app: demo
     spec:
       containers:
-      - name: jenkins-demo
-        image: jenkins/jenkins:lts
+      - name: demo
+        image: gcr.io/google-samples/hello-app:1.0
         ports:
         - containerPort:  8080
-        volumeMounts:
-        - name: jenkins-demo-home
-          mountPath: /var/jenkins_home
-      volumes:
-      - name: jenkins-demo-home
-        persistentVolumeClaim:
-          claimName: jenkins-demo-pvc
