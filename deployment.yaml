@@ -1,10 +1,10 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: demo
   namespace: demo
 spec:
-  replicas:  1
+  replicas: 1
   selector:
     matchLabels:
       app: demo
@@ -17,4 +17,9 @@ spec:
       - name: demo
         image: gcr.io/google-samples/hello-app:1.0
         ports:
-        - containerPort:  8080
+        - containerPort: 8080
+  strategy:
+    blueGreen:
+      activeService: demo
+      previewService: demo-preview
+      autoPromotionEnabled: false
