@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bluegreen-demo-preview
+spec:
+  rules:
+  - host: bluegreen-preview.trimawin.de
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: bluegreen-demo-preview
+            port:
+              name: http
