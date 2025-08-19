@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: likec4-demo
+spec:
+  rules:
+  - host: swf-map.trimawin.de
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: likec4
+            port:
+              name: http-main
