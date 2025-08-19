@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: likec4
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: likec4
+  template:
+    metadata:
+      labels:
+        app: likec4
+    spec:
+      containers:
+      - name: likec4
+        image: likec4/likec4:latest
+        imagePullPolicy: Always
+        args: ["start"]
+        ports:
+        - name: http-main
+          containerPort: 5173
+          protocol: TCP
+        - name: http-dev
+          containerPort: 24678
+          protocol: TCP
+        resources:
+          requests:
+            memory: 512Mi
+            cpu: 500m
+        volumeMounts:
+        - name: likec4-config-vol
+          mountPath: /data
+      volumes:
+      - name: likec4-config-vol
+        configMap:
+          name: likec4-config
